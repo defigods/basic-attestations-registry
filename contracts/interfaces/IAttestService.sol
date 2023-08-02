@@ -29,7 +29,7 @@ struct Attest {
 }
 
 interface IAttestService {
-    function attest(Attest calldata) external;
+    function attest(Attest calldata) external returns (bool);
 
-    function revoke(Attest calldata) external;
+    function revoke(Attest calldata) external returns (bool);
 }

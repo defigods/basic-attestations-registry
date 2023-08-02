@@ -23,13 +23,13 @@ abstract contract BaseAttestService is Ownable {
         _registry = registry;
     }
 
-    function attest(Attest calldata _attest) external onlyRegistry {
-        onAttest(_attest);
+    function attest(Attest calldata _attest) external onlyRegistry returns (bool ret) {
+        ret = onAttest(_attest);
         emit Attested(msg.sender, _attest.recipient, _attest.key, _attest.value);
     }
 
-    function revoke(Attest calldata _attest) external onlyRegistry {
-        onRevoke(_attest);
+    function revoke(Attest calldata _attest) external onlyRegistry returns (bool ret) {
+        ret = onRevoke(_attest);
         emit Revoked(msg.sender, _attest.recipient, _attest.key, _attest.value);
     }
 
@@ -47,7 +47,7 @@ abstract contract BaseAttestService is Ownable {
 
     function getAttestType() external pure virtual returns (AttestType);
 
-    function onAttest(Attest calldata attest) internal view virtual;
+    function onAttest(Attest calldata attest) internal view virtual returns (bool);
 
-    function onRevoke(Attest calldata attest) internal view virtual;
+    function onRevoke(Attest calldata attest) internal view virtual returns (bool);
 }

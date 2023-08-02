@@ -14,11 +14,13 @@ contract OBAttestService is BaseAttestService {
         return AttestType.OB;
     }
 
-    function onAttest(Attest calldata) internal view override {
+    function onAttest(Attest calldata) internal view override returns (bool) {
         if (throwable) revert Errors.ToBeDetermined();
+        return true;
     }
 
-    function onRevoke(Attest calldata) internal view override {
+    function onRevoke(Attest calldata) internal view override returns (bool) {
         if (throwable) revert Errors.ToBeDetermined();
+        return true;
     }
 }

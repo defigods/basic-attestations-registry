@@ -1,10 +1,14 @@
 import { ethers } from 'hardhat';
 
 const main = async () => {
-  const AttestationRegistry = await ethers.getContractFactory('AttestationRegistry');
-  const registry = await AttestationRegistry.deploy();
+  const RegistryFactory = await ethers.getContractFactory('AttestRegistry');
+  const ServiceFactory = await ethers.getContractFactory('SBTAttestService');
+
+  const registry = await RegistryFactory.deploy();
+  const service = await ServiceFactory.deploy(registry.address);
 
   console.log('Registry:', registry.address);
+  console.log('Service:', service.address);
 };
 
 main()

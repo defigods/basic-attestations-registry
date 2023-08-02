@@ -25,16 +25,16 @@ contract AttestRegistry is Ownable {
         emit AttestServiceRegistered(_type, msg.sender, _service);
     }
 
-    function attest(AttestType _type, Attest calldata _attest) external {
+    function attest(AttestType _type, Attest calldata _attest) external returns (bool) {
         address service = _attests[_type];
         if (service == address(0)) revert Errors.ServiceNotExists();
-        IAttestService(service).attest(_attest);
+        return IAttestService(service).attest(_attest);
     }
 
-    function revoke(AttestType _type, Attest calldata _attest) external {
+    function revoke(AttestType _type, Attest calldata _attest) external returns (bool) {
         address service = _attests[_type];
         if (service == address(0)) revert Errors.ServiceNotExists();
-        IAttestService(service).revoke(_attest);
+        return IAttestService(service).revoke(_attest);
     }
 
     function getAttestService(AttestType _type) external view returns (address) {

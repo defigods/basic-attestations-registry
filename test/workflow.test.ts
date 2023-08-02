@@ -105,12 +105,16 @@ describe('Attest Workflow', function () {
       );
     });
 
-    it('show log SBT address from key and emit {Attested} event', async () => {
+    it('returns false if key is not token address', async () => {
+      expect(await registry.callStatic.attest(1, [alice.address, randomAddr, '0x'])).to.eq(false);
+    });
+
+    it('returns true if address from key is sbt address and emit {Attested} event', async () => {
+      expect(await registry.callStatic.attest(1, [alice.address, sbt.address, '0x'])).to.eq(true);
       const tx = await registry.attest(1, [alice.address, sbt.address, '0x']);
       expect(tx)
         .emit(registry, 'Attested')
         .withArgs(owner.address, alice.address, sbt.address, '0x');
-      console.log('from test >>>', sbt.address);
     });
 
     it('should emit {Revoked} event', async () => {
