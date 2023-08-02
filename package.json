@@ -4,7 +4,8 @@
     "compile": "npx hardhat compile",
     "clean": "npx hardhat clean",
     "test": "npx hardhat test",
-    "coverage": "npx hardhat coverage"
+    "coverage": "npx hardhat coverage",
+    "deploy-goerli": "npx hardhat run scripts/deploy.ts --network goerli"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",

@@ -35,3 +35,8 @@ And for each service, also contract owners can update registry address.
 - check coverage of tests
 
   `npm run coverage`
+
+## Example contracts
+
+- Registry: [`0x2FeF2519D6fDbFecEC246faa8F2519eE640d40e8`](https://goerli.etherscan.io/address/0x2FeF2519D6fDbFecEC246faa8F2519eE640d40e8)
+- Service: [`0x64697436438C1d7E0562F90Ab95718a5f18840A6`](https://goerli.etherscan.io/address/0x64697436438C1d7E0562F90Ab95718a5f18840A6)
