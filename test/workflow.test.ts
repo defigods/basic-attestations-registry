@@ -105,9 +105,19 @@ describe('Attest Workflow', function () {
       );
     });
 
-    it('show log SBT address from key', async () => {
-      await registry.attest(1, [alice.address, sbt.address, '0x']);
+    it('show log SBT address from key and emit {Attested} event', async () => {
+      const tx = await registry.attest(1, [alice.address, sbt.address, '0x']);
+      expect(tx)
+        .emit(registry, 'Attested')
+        .withArgs(owner.address, alice.address, sbt.address, '0x');
       console.log('from test >>>', sbt.address);
+    });
+
+    it('should emit {Revoked} event', async () => {
+      const tx = await registry.revoke(1, [alice.address, sbt.address, '0x']);
+      expect(tx)
+        .emit(registry, 'Revoked')
+        .withArgs(owner.address, alice.address, sbt.address, '0x');
     });
   });
 
